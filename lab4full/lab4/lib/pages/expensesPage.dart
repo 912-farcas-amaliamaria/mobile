@@ -58,12 +58,12 @@ class _ExpensesPageState extends State<ExpensesPage> {
     }
   }
 
-  void updateExpense(Expense oldExpense, Expense newExpense) async {
+  void updateExpense(Expense newExpense) async {
     try {
       newExpense.isUpdated = true;
       await _dbHelper.updateExpense(newExpense);
       setState(() {
-        final index = expenses.indexWhere((e) => e.id == oldExpense.id);
+        final index = expenses.indexWhere((e) => e.id == newExpense.id);
         if (index != -1) {
           expenses[index] = newExpense;
           expenses.sort((a, b) => b.date.compareTo(a.date));
@@ -98,56 +98,11 @@ class _ExpensesPageState extends State<ExpensesPage> {
     super.initState();
     loadExpenses();
   }
-/*  final _service = ExpenseService();
-  List<Expense> expenses = [];
-
-  void loadExpenses() async {
-    try {
-      var fetchedExpenses = await _service.getExpenses();
-      setState(() {
-        expenses = fetchedExpenses;
-      });
-    } catch (e) {
-      print("error");
-      print(e.toString());
-    }
-  }
-
-  void addExpense(Expense expense) {
-    setState(() {
-      _service.createExpense(expense);
-      expenses.add(expense);
-      expenses.sort((a, b) => b.date.compareTo(a.date));
-    });
-  }
-
-  void updateExpense(Expense expense, Expense newExpense) {
-    setState(() {
-      final index = expenses.indexWhere((expense) => expense == expense);
-      if (index != -1) {
-        _service.updateExpense(newExpense);
-        expenses[index] = newExpense;
-        expenses.sort((a, b) => b.date.compareTo(a.date));
-      }
-    });
-  }
-
-  void deleteExpense(Expense expense) {
-    setState(() {
-      _service.deleteExpense(expense);
-      expenses.remove(expense);
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadExpenses();
-  }*/
 
   @override
   Widget build(BuildContext context) {
     expenses.sort((a, b) => b.date.compareTo(a.date));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -165,7 +120,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
             return AddPage(addExpense);
           }));
         },
-        tooltip: 'Increment',
+        tooltip: 'Add',
         child: const Icon(Icons.add),
       ),
     );

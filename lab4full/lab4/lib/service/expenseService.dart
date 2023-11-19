@@ -5,7 +5,7 @@ import '../domain/Expense.dart';
 import 'DatabaseHelper.dart';
 
 class ExpenseService {
-  final String baseUrl = "http://192.168.0.106:8080/api/expense";
+  final String baseUrl = "http://192.168.0.154:8080/api/expense";
 
   // Create (POST)
   Future<void> createExpense(Expense expenseData) async {
@@ -89,7 +89,7 @@ class ExpenseService {
       print("sync");
       // 2. Upload local changes to server
       for (var expense in localExpenses) {
-        print(expense.toLocalMap());
+        //print(expense.toLocalMap());
         if (expense.isNew) {
           await createExpense(expense);
         } else if (expense.isUpdated) {

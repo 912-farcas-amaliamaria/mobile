@@ -8,7 +8,7 @@ import '../domain/Expense.dart';
 class ExpensesList extends StatefulWidget {
   final List<Expense> expenses;
   final Function(Expense) onDeleteExpense;
-  final Function(Expense, Expense) onUpdateExpense;
+  final Function(Expense) onUpdateExpense;
 
   const ExpensesList({
     required this.expenses,

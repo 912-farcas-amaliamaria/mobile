@@ -4,7 +4,7 @@ import '../domain/Expense.dart';
 import '../domain/currency.dart';
 
 class UpdatePage extends StatefulWidget {
-  final Function(Expense, Expense) onUpdateExpense;
+  final Function(Expense) onUpdateExpense;
   final Expense expenseToUpdate;
 
   UpdatePage({required this.onUpdateExpense, required this.expenseToUpdate});
@@ -137,7 +137,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   description: description,
                 );
 
-                widget.onUpdateExpense(widget.expenseToUpdate, updatedExpense);
+                widget.onUpdateExpense(updatedExpense);
                 Navigator.of(context).pop();
               }
             },
